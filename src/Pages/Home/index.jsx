@@ -5,7 +5,7 @@ import Card from "../../Components/Cards";
 
 function Home () {
 
-const [items, setItems] = useState(null)
+const [items, setItems] = useState(null);
 
 useEffect(() =>{
 fetch('https://api.escuelajs.co/api/v1/products')
@@ -14,7 +14,7 @@ fetch('https://api.escuelajs.co/api/v1/products')
 
 },[])
     return (
-      <Layout >       
+      <Layout >
        Home 
        <div className="grid gab-4 grid-cols-4 w-full max-w-screen-lg">
        {
