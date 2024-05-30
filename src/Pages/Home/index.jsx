@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Layout from "../../Components/Layout";
 import Card from "../../Components/Cards";
+import { ProductDetail } from "../../Components/ProductDetail";
 
 function Home () {
 
@@ -26,7 +27,7 @@ fetch('https://api.escuelajs.co/api/v1/products')
       })
       };
       </div>
-              
+        <ProductDetail />
       </Layout>
     )
   }
