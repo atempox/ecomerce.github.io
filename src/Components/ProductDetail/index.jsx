@@ -16,6 +16,17 @@ return (
                 <XCircleIcon className='size-6 text-black/30'/>
             </div>
         </div>
+        <figure className="px-6 ">
+            <img className = "w-48 h-48 rounded-lg" 
+            src={context.productToShow.images} 
+            alt={context.productToShow.tittle} />
+        </figure>
+        <p className="flex flex-col p-6">
+            <span className="font-medium text-2xl mb-2">{context.productToShow.price}</span>
+            <span className="font-medium text-md">{context.productToShow.tittle}</span>
+            <span className="font-light text-sm">{context.productToShow.description}</span>
+
+        </p>
     </aside>
 )
 };
