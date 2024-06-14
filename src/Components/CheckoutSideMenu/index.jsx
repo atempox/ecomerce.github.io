@@ -3,6 +3,7 @@ import {ShoppingCardContext} from '../../Context';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import './style.css';
 import { OrderCard } from "../OrderCard";
+import { totalPrice } from '../../Utils'
 
 const CheckoutSideMenu = () => {
     const context = useContext(ShoppingCardContext)
@@ -38,6 +39,13 @@ return (
                     />
                 ))//esto indica que por cada elemento que esté en el carrito por favor pintar una card con esa información
             }
+
+        </div>
+        <div className="pd-6">
+            <p className="flex justify-between items-center">
+                <span className="font-light">Total:</span>
+                <span className="font-medium text-2xl">${totalPrice(context.cartProducts)}</span>
+            </p>
 
         </div>
     </aside>
