@@ -23,6 +23,10 @@ export const ShoppingCardProvider = ({children}) => {
     const openCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(true);
     const closeCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(false);
 
+    //Shoping Card . orders
+
+    const [order, setOrder] = useState([])
+
 
 
     return (
@@ -39,7 +43,9 @@ export const ShoppingCardProvider = ({children}) => {
             isCheckoutSideMenuOpen,
             setIsCheckoutSideMenuOpen,
             openCheckoutSideMenu,
-            closeCheckoutSideMenu
+            closeCheckoutSideMenu,
+            order,
+            setOrder
         }}>
         {children}
         </ShoppingCardContext.Provider>
