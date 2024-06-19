@@ -1,5 +1,5 @@
 import React from "react";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const ShoppingCardContext = createContext();
 
@@ -26,6 +26,31 @@ export const ShoppingCardProvider = ({children}) => {
     //Shoping Card . orders
 
     const [order, setOrder] = useState([])
+    
+    //get products
+    const [items, setItems] = useState(null);
+    const [filteredItems, setFilteredItems] = useState(null);
+
+    //funcion para filtrar items (toLowerCase es la propiedad para ignorar mayusculas y minusculas)
+    const filteredItemsByTittle = (items, searchByTitle) => {
+        return items?.filter( item => item.title.includes(searchByTitle))
+    }
+    useEffect(() =>{
+        if (setFilteredItems) setFilteredItems(filteredItemsByTittle(items,setFilteredItems))     
+    
+        },[items, setFilteredItems])
+
+    useEffect(() =>{
+    fetch('https://api.escuelajs.co/api/v1/products')
+    .then(response => response.json())
+    .then(data => setItems(data))
+
+    },[])
+
+
+    //get products by tittle
+    const [searchByTitle, setSearchByTitle] = useState(null);
+
 
 
 
@@ -45,7 +70,12 @@ export const ShoppingCardProvider = ({children}) => {
             openCheckoutSideMenu,
             closeCheckoutSideMenu,
             order,
-            setOrder
+            setOrder,
+            items,
+            setItems,
+            searchByTitle,
+            setSearchByTitle,
+            
         }}>
         {children}
         </ShoppingCardContext.Provider>

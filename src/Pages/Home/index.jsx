@@ -1,25 +1,28 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import React from "react";
 import Layout from "../../Components/Layout";
 import Card from "../../Components/Cards";
 import { ProductDetail } from "../../Components/ProductDetail";
+import {ShoppingCardContext} from '../../Context';
+
 
 function Home () {
 
-const [items, setItems] = useState(null);
+  const context = useContext(ShoppingCardContext)
 
-useEffect(() =>{
-fetch('https://api.escuelajs.co/api/v1/products')
-.then(response => response.json())
-.then(data => setItems(data))
-
-},[])
     return (
       <Layout >
-       Home 
+       <div className="flex items-center justify-center relative w-80 mb-4">
+          <h1 className="fond-medium text-xl">Exclusive Products</h1>
+        </div>
+        <input 
+          type="text" 
+          placeholder="Search a product" 
+          className="raunded-lg border border-black w-80 p-4 mb-4"
+          onChange={(event) => context.setSeachByTittle(event.target.value)} />
        <div className="grid gab-4 grid-cols-4 w-full max-w-screen-lg">
        {
-        items ?.map(item => {
+        context.items ?.map(item => {
         return <Card
         key={item.id} 
         data={item}
