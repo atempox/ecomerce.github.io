@@ -19,11 +19,11 @@ return (
         <figure className="px-6 ">
             <img className = "w-48 h-48 rounded-lg" 
             src={context.productToShow.images} 
-            alt={context.productToShow.tittle} />
+            alt={context.productToShow.title} />
         </figure>
         <p className="flex flex-col p-6">
             <span className="font-medium text-2xl mb-2">{context.productToShow.price}</span>
-            <span className="font-medium text-md">{context.productToShow.tittle}</span>
+            <span className="font-medium text-md">{context.productToShow.title}</span>
             <span className="font-light text-sm">{context.productToShow.description}</span>
 
         </p>

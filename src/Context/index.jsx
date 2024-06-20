@@ -24,32 +24,35 @@ export const ShoppingCardProvider = ({children}) => {
     const closeCheckoutSideMenu = () => setIsCheckoutSideMenuOpen(false);
 
     //Shoping Card . orders
-
+    
     const [order, setOrder] = useState([])
     
     //get products
     const [items, setItems] = useState(null);
     const [filteredItems, setFilteredItems] = useState(null);
-
-    //funcion para filtrar items (toLowerCase es la propiedad para ignorar mayusculas y minusculas)
-    const filteredItemsByTittle = (items, searchByTitle) => {
-        return items?.filter( item => item.title.includes(searchByTitle))
-    }
-    useEffect(() =>{
-        if (setFilteredItems) setFilteredItems(filteredItemsByTittle(items,setFilteredItems))     
     
-        },[items, setFilteredItems])
-
-    useEffect(() =>{
-    fetch('https://api.escuelajs.co/api/v1/products')
-    .then(response => response.json())
-    .then(data => setItems(data))
-
-    },[])
-
-
-    //get products by tittle
+    //get products by title
     const [searchByTitle, setSearchByTitle] = useState(null);
+    
+    
+    useEffect(() =>{
+        fetch('https://api.escuelajs.co/api/v1/products')
+        .then(response => response.json())
+        .then(data => setItems(data))
+        
+    },[])
+    
+    //funcion para filtrar items (toLowerCase es la propiedad para ignorar mayusculas y minusculas)
+
+    const filteredItemsByTitle = (items, searchByTitle) => {
+        return items?.filter( item => item.title.toLowerCase().includes(searchByTitle.toLowerCase))
+    }
+    
+   
+    useEffect(() =>{
+        if (setFilteredItems) setFilteredItems(filteredItemsByTitle(items,setFilteredItems))     
+            
+        },[items, setFilteredItems])
 
 
 
