@@ -44,16 +44,13 @@ export const ShoppingCardProvider = ({children}) => {
     
     //funcion para filtrar items (toLowerCase es la propiedad para ignorar mayusculas y minusculas)
 
-    const filteredItemsByTitle = (items, searchByTitle) => {
-        return items?.filter( item => item.title.toLowerCase().includes(searchByTitle.toLowerCase))
-    }
-    
-   
-    useEffect(() =>{
-        if (setFilteredItems) setFilteredItems(filteredItemsByTitle(items,setFilteredItems))     
-            
-        },[items, setFilteredItems])
-
+        const filteredItemsByTitle = (items, searchByTitle) => {
+            return items?.filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+          }
+        
+          useEffect(() => {
+            if (searchByTitle) setFilteredItems(filteredItemsByTitle(items, searchByTitle))
+          }, [items, searchByTitle])
 
 
 
@@ -78,6 +75,7 @@ export const ShoppingCardProvider = ({children}) => {
             setItems,
             searchByTitle,
             setSearchByTitle,
+            filteredItems
             
         }}>
         {children}
