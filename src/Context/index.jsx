@@ -17,6 +17,7 @@ export const ShoppingCardProvider = ({children}) => {
 
     //Shopping Cart . Add products to cart
     const [cartProducts, setCartProducts] = useState([]);
+  
 
     //Product checkout side menu . open close
     const [isCheckoutSideMenuOpen, setIsCheckoutSideMenuOpen] = useState(false);
@@ -29,6 +30,7 @@ export const ShoppingCardProvider = ({children}) => {
     
     //get products
     const [items, setItems] = useState(null);
+
     const [filteredItems, setFilteredItems] = useState(null);
     
     //get products by title
@@ -55,27 +57,30 @@ export const ShoppingCardProvider = ({children}) => {
         return items?.filter(item => item.category.name.toLowerCase().includes(searchByCategory.toLowerCase()))
         }
 
-    const fulterBy = (searchType, items, searchByTitle) => {
-        if (searchType === 'BY_TITLE'){
+    const filterBy = (searchType, items, searchByTitle, searchByCategory) => {
+        if (searchType === 'BY_TITLE') {
             return filteredItemsByTitle(items, searchByTitle)
         }
-        if (searchType === 'BY_CATEGORY'){
+    
+        if (searchType === 'BY_CATEGORY') {
             return filteredItemsByCategory(items, searchByCategory)
         }
-        if (searchType === 'BY_TITLE_AND_CATEGORY'){
-            return filteredItemsByCategory(items, searchByCategory).filter(item =>item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+    
+        if (searchType === 'BY_TITLE_AND_CATEGORY') {
+            return filteredItemsByCategory(items, searchByCategory).filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
         }
-        if (!searchType){
+    
+        if (!searchType) {
             return items
         }
-    }
+        }
     
     useEffect(() => {
-    if (searchByTitle && searchByCategory) setFilteredItems(fulterBy('BY_TITLE_AND_CATEGORY', items, searchByTitle, searchByCategory))
-    if (searchByTitle && !searchByCategory) setFilteredItems(fulterBy('BY_TITLE', items, searchByTitle, searchByCategory))
-    if (!searchByTitle && searchByCategory) setFilteredItems(fulterBy('BY_CATEGORY', items, searchByTitle, searchByCategory))
-    if (!searchByTitle && !searchByCategory) setFilteredItems(fulterBy(null, items, searchByTitle, searchByCategory))
-    }, [items, searchByTitle, searchByCategory])
+        if (searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY', items, searchByTitle, searchByCategory))
+        if (searchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, searchByTitle, searchByCategory))
+        if (!searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, searchByTitle, searchByCategory))
+        if (!searchByTitle && !searchByCategory) setFilteredItems(filterBy(null, items, searchByTitle, searchByCategory))
+      }, [items, searchByTitle, searchByCategory])
 
 
 

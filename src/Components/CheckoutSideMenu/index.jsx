@@ -24,8 +24,8 @@ const CheckoutSideMenu = () => {
             totalPrice: totalPrice(context.cartProducts)
         }
         context.setOrder([...context.order, orderToAdd]) //esta es la forma para indicar que el actualizador de (order) será el order acutal más el orderToAdd
-        
         context.setCartProducts([]) //actualiza cartProducts a un array vacio para una nueva compra.
+        context.setSearchByTitle(null)
     }
  
 return (
